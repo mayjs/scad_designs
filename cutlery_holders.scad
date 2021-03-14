@@ -63,7 +63,7 @@ module serving_spoon_top() {
 }
 
 module knive_holder(num_knives=6, preview=false) {
-    blade_thickness = 1.6 + .2;
+    blade_thickness = 1.6 + .7;
     holder_length = 50;
     spacing = 10;
     total_width = (num_knives*blade_thickness) + ((num_knives-1) * spacing) + 2*general_wall_thickness;
