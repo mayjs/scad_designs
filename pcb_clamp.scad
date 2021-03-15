@@ -47,7 +47,7 @@ module sleeve() {
     }
     lift(inner_plate_thickness)
     linear_extrude(height=m4_nut_h + play)
-    circle(r=m4_nut_dia/2, $fn=6);
+    circle(r=m4_nut_dia/2 + 1.5*play, $fn=6);
   }
   lift(inner_plate_thickness)
   linear_extrude(height=sleeve_height) {
@@ -60,7 +60,7 @@ module sleeve() {
 
 module inner_tube() {
   sleeve_inner = magnet_dia - 2*wall_th;
-  inner_tube_or = sleeve_inner/2 - play;
+  inner_tube_or = sleeve_inner/2 - 3*play;
   linear_extrude(height=inner_tube_height)
   ring(r=inner_tube_or, thickness=wall_th, inner=false); 
   nut_hole_h = m4_nut_h + play;
@@ -77,7 +77,7 @@ module inner_tube() {
         lift(inner_plate_thickness)
         linear_extrude(height=wall_th)
         difference() {
-          circle(r=magnet_dia/2);
+          circle(r=magnet_dia/2 + .5);
           circle(r=4.2/2 + play);
         }
       }
@@ -131,7 +131,7 @@ module showcase() {
 }
 
 //top_plate();
-//inner_tube();
+inner_tube();
 //sleeve();
 
-showcase();
+//showcase();
