@@ -11,14 +11,23 @@ spring_height = 35;
 spring_wire_dia = .7;
 spring_inner_dia = 7.7;
 
-m4_nut_h = 3.05;
-m4_nut_dia = 8;
+/* M4 */
+// m4_nut_h = 3.05;
+// m4_nut_dia = 8;
+/* M3 */
+m4_nut_h = 2.37;
+m4_nut_dia = 6.2;
 inner_plate_thickness = 1;
 wall_th = 1.6;
 
 sleeve_height= spring_height * .7;
 play = .15;
 inner_tube_height = spring_height / 2;
+
+/* M4 */
+// screw_dia = 4.2;
+/* M3 */
+screw_dia = 3.2;
 
 module magnet() {
   difference() {
@@ -37,12 +46,12 @@ module mock_spring() {
   }
 }
 
-module sleeve() {
+module sleeve(magnet_recess_dia=0, magnet_recess_h=0) {
   difference() {
     linear_extrude(height=inner_plate_thickness + m4_nut_h) {
       difference() {
         circle(r=magnet_dia/2);
-        circle(r=4.2/2);
+        circle(r=screw_dia/2);
       }
     }
     lift(inner_plate_thickness)
@@ -50,10 +59,18 @@ module sleeve() {
     circle(r=m4_nut_dia/2 + 1.5*play, $fn=6);
   }
   lift(inner_plate_thickness)
-  linear_extrude(height=sleeve_height) {
+  linear_extrude(height=sleeve_height - magnet_recess_h) {
     difference() {
       circle(r=magnet_dia/2);
       circle(r=magnet_dia/2 - wall_th);
+    }
+  }
+  if(magnet_recess_dia > 0) {
+    lift(-magnet_recess_h)
+    linear_extrude(height=magnet_recess_h)
+    difference() {
+      circle(r=magnet_dia/2);
+      circle(r=magnet_recess_dia/2);
     }
   }
 }
@@ -72,13 +89,13 @@ module inner_tube() {
         linear_extrude(height=inner_plate_thickness)
         difference() {
           circle(r=inner_tube_or);
-          circle(r=4.2/2 + play);
+          circle(r=screw_dia/2 + play);
         }
         lift(inner_plate_thickness)
         linear_extrude(height=wall_th)
         difference() {
           circle(r=magnet_dia/2 + .5);
-          circle(r=4.2/2 + play);
+          circle(r=screw_dia/2 + play);
         }
       }
     }
@@ -95,7 +112,7 @@ module top_plate() {
   linear_extrude(height=inner_plate_thickness)
   difference() {
     circle(r=magnet_dia/2);
-    circle(r=4.2/2 + play);
+    circle(r=screw_dia/2 + play);
   }
 }
 
@@ -130,8 +147,8 @@ module showcase() {
   }
 }
 
-//top_plate();
-inner_tube();
-//sleeve();
+top_plate();
+//inner_tube();
+//sleeve(magnet_recess_dia=15, magnet_recess_h=3);
 
 //showcase();
