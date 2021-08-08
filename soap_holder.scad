@@ -10,7 +10,7 @@ $fn=100;
 
 hex_rad = 6;
 strip = 2.1;
-holder_dims = [145, 83.8];
+holder_dims = [120, 70];
 
 corner_rad = 5;
 tray_h = 3;
@@ -18,10 +18,10 @@ tray_h = 3;
 min_h = 2;
 max_h = 8;
 
-total_h = 16;
+total_h = 19;
 opening = 10;
 
-holder_h = total_h - 7;
+holder_h = total_h - 10;
 
 play = .2;
 
