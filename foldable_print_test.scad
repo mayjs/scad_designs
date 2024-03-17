@@ -13,8 +13,8 @@ difference() {
     rotate([90,0,0])
     linear_extrude(height=part_size.y)
     polygon([
-        [-first_layer,first_layer],
-        [first_layer,first_layer],
+        [-first_layer/2,first_layer],
+        [first_layer/2,first_layer],
         [wall_thickness, wall_thickness],
         [-wall_thickness, wall_thickness]
     ]);
